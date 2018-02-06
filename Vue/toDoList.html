@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+    <style>
+        .completed{
+            text-decoration: line-through;
+            color: #eee;
+        }
+        .editing .view{
+            display: none;
+        }
+        .editing .edit{
+            display: block;
+        }
+        .edit{
+            display: none;
+        }
+        .action a{
+            text-decoration: none;
+            color: #000;
+            margin: 15px;
+        }
+        .action .active{
+            background-color: coral;
+        }
+        li{
+            list-style: none;
+            display: inline;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <input type="text" v-on:keyup.enter="addTodo" v-model="todo">
+    <ul>
+        <span v-show="!list.length">还没有添加任何任务</span>
+        <ul>
+            <li v-show="list.length">{{noCheckedLength}}个任务未完成</li>
+            <li class="action">
+                <a href="#all" v-bind:class="{active:visibility==='all'}">所有任务</a>
+                <a href="#unfinished" v-bind:class="{active:visibility==='unfinished'}">未完成的任务</a>
+                <a href="#finished" v-bind:class="{active:visibility==='finished'}">已完成的任务</a>
+            </li>
+        </ul>
+
+        <li v-for="item in filterList" :class="{completed:item.isChecked,editing:item===editTodos}">
+            <div class="view">
+                <input type="checkbox" v-model="item.isChecked">
+                <label @dblclick="editTodo(item)">{{item.title}}</label>
+                <button @click="deleteTodo(item)">删除</button>
+            </div>
+            <input type="text" class="edit" v-model="item.title" v-focus="item===editTodos" @blur="editedTodo(item)" @keyup.enter="editedTodo(item)" @keyup.esc="cancelEdit(item)">
+        </li>
+    </ul>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

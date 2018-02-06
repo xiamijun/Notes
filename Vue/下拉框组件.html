@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>自定义下拉框</h2>
+    <custom-select btn-value="查询" v-bind:list="list1"></custom-select>
+
+    <h2>自定义下拉框2</h2>
+    <custom-select btn-value="搜索" v-bind:list="list2"></custom-select>
+</div>
+<script>
+
+    Vue.component('custom-select',{
+        data:function () {
+            return {
+                selectShow:false,
+                val:''
+            };
+        },
+        props:['btnValue','list'],
+        template:`<section>
+    <div>
+        <div>
+            <input type="text" @click="selectShow=!selectShow" v-bind:value="val">
+            <input type="button" v-bind:value="btnValue">
+            <span></span>
+        </div>
+        <custom-list v-show="selectShow" v-bind:list="list" v-on:receive="changeValue"></custom-list>
+    </div>
+</section>`,
+        methods:{
+            changeValue(value){
+                this.val=value;
+            }
+        }
+    });
+
+    Vue.component('custom-list',{
+        props:['list'],
+        template:`<ul class="list">
+            <li v-for="item of list" v-on:click="selectValueHandle(item)">{{item}}</li>
+        </ul>`,
+        methods:{
+            selectValueHandle(item){
+                //点击子组件，即子组件有交互
+                //告知父改变val值，需触发自定义事件
+                this.$emit('receive',item)
+            }
+        }
+    });
+
+
+    new Vue({
+        el:"#app",
+        data:{
+            list1:['北京','上海'],
+            list2:['2017','2016']
+        }
+    });
+</script>
+
+</body>
+</html>

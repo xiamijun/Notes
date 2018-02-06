@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <m-tree v-bind:data="treeList"></m-tree>
+</div>
+<script>
+
+    Vue.component('m-tree',{
+        template:`<div class="tree-menu">
+            <ul>
+            <li v-for="item of data">
+            <div>
+            <span>{{item.title}}</span>
+            </div>
+            <ul v-if="item.children">
+            <li v-for="item2 of item.children">
+            <span>{{item2.title}}</span>
+</li>
+</ul>
+            </li>
+            </ul>
+        </div>`,
+        props:{
+            data:{
+                type:Array,
+                default:[]
+            }
+        }
+    });
+
+    let data=[{
+        title:'目录',
+        children:[{
+            title:'我的音乐',
+            children:[{
+                title:'周杰伦',
+                children:[{
+                    title:'发如雪'
+                }]
+            },{
+                title:'王杰',
+                children:[{
+                    title:'发如雪'
+                }]
+            }
+            ]
+        },{
+            title:'我的照片'
+        }
+        ]
+    }];
+
+    new Vue({
+        el:"#app",
+        data:{
+            treeList:data
+        }
+    });
+</script>
+</body>
+</html>

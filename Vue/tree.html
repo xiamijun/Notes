@@ -11,20 +11,27 @@
 </div>
 <script>
 
-    Vue.component('m-tree',{
-        template:`<div class="tree-menu">
-            <ul>
+    Vue.component('m-tree-list',{
+        template:`<ul>
             <li v-for="item of data">
             <div>
             <span>{{item.title}}</span>
             </div>
-            <ul v-if="item.children">
-            <li v-for="item2 of item.children">
-            <span>{{item2.title}}</span>
+            <m-tree-list v-if="item.children" v-bind:data="item.children"></m-tree-list>
 </li>
-</ul>
-            </li>
-            </ul>
+</ul>`,
+        props:{
+            data:{
+                type:Array,
+                default:[]
+            }
+        }
+    });
+
+    Vue.component('m-tree',{
+        template:`<div class="tree-menu">
+            <m-tree-list v-bind:data="data"></m-tree-list>
+
         </div>`,
         props:{
             data:{

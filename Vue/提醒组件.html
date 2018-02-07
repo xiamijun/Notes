@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+    <style>
+        .success{
+            background-color: green;
+        }
+        .warning{
+            background-color: orange;
+        }
+        .error{
+            background-color: red;
+        }
+        .info{
+            background-color: deepskyblue;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <m-alert type="success"></m-alert>
+</div>
+<script>
+
+    Vue.component('m-alert',{
+        template:`<div v-bind:class="[classes]">
+    <span>提示</span>
+</div>`,
+        props:{
+            type:{
+                type:String,
+                default:'success'
+            }
+        },
+        computed:{
+            classes(){
+                return this.type;
+            }
+        }
+    });
+
+    new Vue({
+        el:"#app"
+    });
+</script>
+</body>
+</html>

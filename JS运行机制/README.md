@@ -53,7 +53,7 @@
 5. 异步http请求线程  
 &ensp; &ensp; `XMLHttpRequest`在连接后通过新开一个线程请求。  
 &ensp; &ensp; 检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件，将这个回调再放入事件队列中。再由JavaScript引擎执行。  
-![图](./1.png)  
+![图](https://github.com/xiamijun/blog/blob/master/images/thread.png?raw=true)  
 ### Browser进程和浏览器内核（Renderer进程）的通信过程
 * `Browser`进程收到用户请求，获取页面内容（如通过网络下载资源），随后将该任务通过`RendererHost`接口传递给`Render`进程。  
 
@@ -96,7 +96,7 @@
 * 主线程之外，`事件触发线程`管理着一个`任务队列`，只要`异步任务`有了运行结果，就在`任务队列`之中放置一个事件。
 
 * 一旦`执行栈`中的所有`同步任务`执行完毕（此时JS引擎空闲），系统就会读取`任务队列`，将可运行的`异步任务`添加到`执行栈`中，开始执行。  
-![event Loop](./2.png)  
+![event Loop](https://github.com/xiamijun/blog/blob/master/images/eventLoop.png?raw=true)  
 
 ### 定时器
 定时器是JS引擎检测的么？当然不是了。它是由定时器线程控制（因为JS引擎自己都忙不过来，根本无暇分身）。   
@@ -169,4 +169,4 @@ setTimeout
 `Promise`，`process`.`nextTick`等
 
 ##### 总结
-![总结](./3.png)
+![总结](https://github.com/xiamijun/blog/blob/master/images/task.png?raw=true)

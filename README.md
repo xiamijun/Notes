@@ -1,5 +1,7 @@
 # 我的博客
 ## 目录
+### [JS运行机制](https://github.com/xiamijun/blog/issues/12)
+*2018-08-28*
 ### [webpack笔记](https://github.com/xiamijun/blog/issues/10)
 *2018-03-15*
 ### [NVM笔记](https://github.com/xiamijun/blog/issues/9)
